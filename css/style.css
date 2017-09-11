@@ -1,3 +1,44 @@
 body{
-	text-align: center;
+	/*text-align: center;*/
+	background: #42B8ED;
+}
+#cpuHand{
+	margin-top: 20px;
+}
+.hand-container{
+	background: #e6f5ff;
+	width: 350px;
+	height: 100px;
+	margin-left: 500px;
+}
+.handCard{
+	width: 30px;
+	height: 65px;
+	margin: 2px;
+}
+.deck{
+	width: 90px;
+	height: 120px;
+	background: #e6f5ff;
+	margin-left: 620px;
+	margin-top: 20px
+}
+.middle-row{
+	width: 600px;
+	height: 150px;
+	margin-left: 455px
+}
+.helpCard{
+	width: 80px;
+	height: 110px;
+	background: #e6f5ff;
+	margin:20px;
+	display: inline-block;
+}
+.startCard{
+	width: 70px;
+	height: 100px;
+	background: #e6f5ff;
+	margin:20px 10px;
+	display: inline-block;
 }
