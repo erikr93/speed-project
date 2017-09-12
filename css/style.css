@@ -17,6 +17,9 @@ body{
 	margin: 5px;
 	border: solid black 2px;
 	display: inline-block;
+	position: absolute;
+	background-image: url("../img/king_of_hearts2.png");
+	background-size: cover;
 }
 .deck{
 	width: 90px;
@@ -28,7 +31,8 @@ body{
 .middle-row{
 	width: 600px;
 	height: 150px;
-	margin-left: 455px
+	margin-left: 455px;
+	z-index: 0.5;
 }
 .helpCard{
 	width: 80px;
@@ -36,6 +40,7 @@ body{
 	background: #e6f5ff;
 	margin:20px;
 	display: inline-block;
+	border: solid black 3px;
 }
 .startCard{
 	width: 70px;
