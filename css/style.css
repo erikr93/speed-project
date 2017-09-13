@@ -12,18 +12,21 @@ body{
 	margin-left: 500px;
 }
 .handCard{
-	width: 50px;
+	width: 56px;
 	height: 90px;
 	margin: 5px;
-	border: solid black 2px;
 	display: inline-block;
+	background: url("../img/back1.jpg");
+	background-size:cover;
 }
 .deck{
 	width: 90px;
 	height: 120px;
 	background: #e6f5ff;
 	margin-left: 620px;
-	margin-top: 20px
+	margin-top: 20px;
+	background: url("../img/back1.jpg");
+	background-size: cover;
 }
 .middle-row{
 	width: 600px;
@@ -34,14 +37,17 @@ body{
 	width: 80px;
 	height: 110px;
 	background: #e6f5ff;
-	margin:20px;
+	margin: 20px;
 	display: inline-block;
-	border: solid black 3px;
+	background: url("../img/back1.jpg");
+	background-size: cover;
 }
 .startCard{
 	width: 70px;
 	height: 100px;
 	background: #e6f5ff;
-	margin:20px 10px;
+	margin: 20px 10px;
 	display: inline-block;
+	background: url("../img/back1.jpg");
+	background-size: cover;
 }

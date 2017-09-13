@@ -1,7 +1,3 @@
-
-// var cardData = JSON.parse(data);
-// console.log(cardData);
-
 var cardObject = [{
 	"rank": 2,
 	"suit": "clubs",
@@ -9,7 +5,7 @@ var cardObject = [{
 },
 {
 	"rank": 2,
-	"suit":"diamonds",
+	"suit": "diamonds",
 	"img": "img/2_of_diamonds.png"
 },
 {
@@ -263,69 +259,105 @@ var cardObject = [{
 	"img": "img/ace_of_spades.png"
 }];
 
-console.log(cardObject[0].img);
-// pulls JSON data
-$.getJSON('../data.json', function(data) {
-	var imgs = "";
-
-	$.each(data, function(key, value){
-		// imgs += val(value.img);
-
-	});
-	shuffle();
-	console.log(data[0]);
-});
+// console.log(cardObject[20].img);
 
 // empty array for creating the deck
-var data = [];
+var playerHand = [];
+var opponentHand = [];
+var startCards = [];
+var helpDeck = [];
 
 // shuffle function
 function shuffle(array) {
-	getNewDeck();
-  var m = data.length, t, i;
-  // While there remain elements to shuffle…
-  while (m) {
-    // Pick a remaining element…
-    i = Math.floor(Math.random() * m--);
-    // And swap it with the current element.
-    t = array[m];
-    array[m] = array[i];
-    array[i] = t;
+	var m = cardObject.length, t, i;
+	// While there remain elements to shuffle…
+	while (m) {
+    	// Pick a remaining element…
+    	i = Math.floor(Math.random() * m--);
+    	// And swap it with the current element.
+    	t = array[m];
+    	array[m] = array[i];
+    	array[i] = t;
   }
   return array;
 }
 
-// clicks card in hand eventually want this to move to the start card position
+// clicks card in hand, want this to move to the start card position
 $(".handCard").click(function(){
-		console.log("clicked");
-		var card = 0;
-		for(var i = 0; i < data.length; i++){
-			card = Math.floor(Math.random() * 52);
+	var playerCard = parseInt(this.childNodes[0].className);
+	var startCard1 = startCards[0].rank;
+	var startCard2 = startCards[1].rank;
+	if(Math.abs(startCard1 - playerCard) < 2) {
+		//remove from playerHand array (remove by value)
+		playerCard.splice(startCard1, startCard2 - 1 [playerCard]);
+		//add to index 0 of startCards
+
+		//draw a new card and add it to your hand
+		//display it
+	} else if(Math.abs(startCard2 - playerCard) < 2) {
+
+	} else {
+		console.log("Pick another card.")
+	}
+});	
+
+function getCards(array, hand, length) {
+	console.log(length);
+	if(array.length > length) {
+		for(var i = 0; i < length; i++) {
+			hand.push(array.pop());
 		}
-	});	
+	} else {
+		for(var i = 0; i < array.length; i++) {
+			hand.push(array.pop());
+		}
+	}
+}
 
-//trying to pull image from JSON file and place on cards in hand
-// data.img.forEach( function(obj) {
-//   var img = new Image();
-//   img.src = obj.bannerImg1;
-//   document.getElementsByClassName("handCard").appendChild(img);
-// });
+function displayHand(array) {
+	for(var i = 0; i < array.length; i++) {
+		showHand(array[i].img, array[i].rank, 56, 90, i);
+	}
+}
 
-// card object
-// function card() {
-//   var thisImage = new Image();
-//   thisImage.src = "";
-//   this.rank = "";
-//   this.suit = 0;
-//   this.img = thisImage.src;
-// }
+function displayStartCard(array) {
+	for(var i = 0; i < array.length; i++) {
+		showStartCard(array[i].img, array[i].rank, 70, 100, i);
+	}
+}
 
-// function getNewDeck() {
-//   for (var i = 0; i < cardData.length; i++) {
-//     var thisCard = new Card();
-//     thisCard.rank = cardData[i].rank;
-//     thisCard.suit = cardData[i].suit;
-//     thisCard.img = cardData[i].img;
-//     newDeck.push(thisCard);
-//   }
-// }
+function showHand(src, rank, width, height, index) {
+    var img = document.createElement("img");
+    img.src = src;
+    img.width = width;
+    img.height = height;
+    img.className = rank;
+
+    //add img to hand
+    document.getElementsByClassName("handCard")[index].appendChild(img);
+}
+
+function showStartCard(src, rank, width, height, index) {
+    var img = document.createElement("img");
+    img.src = src;
+    img.width = width;
+    img.height = height;
+    img.className = rank;
+
+    // add img to start position
+    document.getElementsByClassName("startCard")[index].appendChild(img);
+}
+
+//shuffle cards
+shuffle(cardObject);
+
+//distribute cards
+getCards(cardObject, playerHand, 5);
+getCards(cardObject, opponentHand, 5);
+getCards(cardObject, startCards, 2);
+getCards(cardObject, helpDeck, 5);
+getCards(cardObject, helpDeck, 5);
+
+//display cards
+displayHand(playerHand);
+displayStartCard(startCards);
