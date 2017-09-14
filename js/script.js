@@ -266,6 +266,7 @@ var playerHand = [];
 var opponentHand = [];
 var startCards = [];
 var helpDeck = [];
+var discard = [];
 
 // shuffle function
 function shuffle(array) {
@@ -284,16 +285,18 @@ function shuffle(array) {
 
 // clicks card in hand, want this to move to the start card position
 $(".handCard").click(function(){
+	//this = card clicked
 	var playerCard = parseInt(this.childNodes[0].className);
 	var startCard1 = startCards[0].rank;
 	var startCard2 = startCards[1].rank;
 	if(Math.abs(startCard1 - playerCard) < 2) {
-		//remove from playerHand array (remove by value)
-		playerCard.splice(startCard1, startCard2 - 1 [playerCard]);
+		//remove from playerHand array 
+		$(startCard1).img.replaceWith(this);
+		startCard1.splice(this).push(discard);
 		//add to index 0 of startCards
 
 		//draw a new card and add it to your hand
-		//display it
+		//display new card from deck in hand
 	} else if(Math.abs(startCard2 - playerCard) < 2) {
 
 	} else {
@@ -301,8 +304,8 @@ $(".handCard").click(function(){
 	}
 });	
 
+
 function getCards(array, hand, length) {
-	console.log(length);
 	if(array.length > length) {
 		for(var i = 0; i < length; i++) {
 			hand.push(array.pop());
@@ -314,18 +317,21 @@ function getCards(array, hand, length) {
 	}
 }
 
+// generates hand cards
 function displayHand(array) {
 	for(var i = 0; i < array.length; i++) {
 		showHand(array[i].img, array[i].rank, 56, 90, i);
 	}
 }
 
+//generates start cards
 function displayStartCard(array) {
 	for(var i = 0; i < array.length; i++) {
 		showStartCard(array[i].img, array[i].rank, 70, 100, i);
 	}
 }
 
+//shows img on hand cards
 function showHand(src, rank, width, height, index) {
     var img = document.createElement("img");
     img.src = src;
@@ -337,6 +343,7 @@ function showHand(src, rank, width, height, index) {
     document.getElementsByClassName("handCard")[index].appendChild(img);
 }
 
+// shows img on start cards
 function showStartCard(src, rank, width, height, index) {
     var img = document.createElement("img");
     img.src = src;
