@@ -21,7 +21,7 @@ body{
 }
 .deck{
 	width: 90px;
-	height: 120px;
+	height: 130px;
 	background: #e6f5ff;
 	margin-left: 620px;
 	margin-top: 20px;
@@ -35,7 +35,7 @@ body{
 }
 .helpCard{
 	width: 80px;
-	height: 110px;
+	height: 115px;
 	background: #e6f5ff;
 	margin: 20px;
 	display: inline-block;

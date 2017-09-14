@@ -263,10 +263,13 @@ var cardObject = [{
 
 // empty array for creating the deck
 var playerHand = [];
+var playerDeck = [];
 var opponentHand = [];
+var opponentDeck = [];
 var startCards = [];
 var helpDeck = [];
 var discard = [];
+
 
 // shuffle function
 function shuffle(array) {
@@ -291,8 +294,7 @@ $(".handCard").click(function(){
 	var startCard2 = startCards[1].rank;
 	if(Math.abs(startCard1 - playerCard) < 2) {
 		//remove from playerHand array 
-		$(startCard1).img.replaceWith(this);
-		startCard1.splice(this).push(discard);
+		moveCards(cardObject, discard, startCard1, playerCard);
 		//add to index 0 of startCards
 
 		//draw a new card and add it to your hand
@@ -303,6 +305,14 @@ $(".handCard").click(function(){
 		console.log("Pick another card.")
 	}
 });	
+
+function moveCards(array, discard, index, hand){
+	var img = document.createElement("img");
+	img.src = i;
+	var oldImg = document.getElementById(index);
+	document.getElementById('handCard').replaceChild(img, oldImg);
+	discard.push(array.splice(hand));
+}
 
 
 function getCards(array, hand, length) {
@@ -355,6 +365,14 @@ function showStartCard(src, rank, width, height, index) {
     document.getElementsByClassName("startCard")[index].appendChild(img);
 }
 
+// function checkWin(){
+// 	if(playerDeck && playerHand === []){
+// 		alert("Player wins");
+// 	} else (opponentHand && opponentDeck === []){
+// 		alert("Opponent wins");
+// 	}
+// }
+
 //shuffle cards
 shuffle(cardObject);
 
@@ -368,3 +386,5 @@ getCards(cardObject, helpDeck, 5);
 //display cards
 displayHand(playerHand);
 displayStartCard(startCards);
+
+//win function
