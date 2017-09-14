@@ -333,7 +333,7 @@ function displayHand(array) {
 		showHand(array[i].img, array[i].rank, 56, 90, i);
 	}
 }
-
+//testing stupid things for githubio
 //generates start cards
 function displayStartCard(array) {
 	for(var i = 0; i < array.length; i++) {
@@ -372,6 +372,7 @@ function showStartCard(src, rank, width, height, index) {
 // 		alert("Opponent wins");
 // 	}
 // }
+
 
 //shuffle cards
 shuffle(cardObject);
