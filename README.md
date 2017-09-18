@@ -10,5 +10,5 @@ It took me a really long time to get the images and the rank of the card to move
 ## Next steps
 My next step as of right now is to incorporate the win function and display an alert as to which player won. I was having a hard time figuring out how to tell when the player deck was exhausted. Another step I need to complete is to make the "help cards" function. They are what will go onto the center cards if neiter player can make a move. With that I was having a hard time thinking of a way to tell the computer that neither player could make a move. There are still a few bugs involving placing cards I would like to fix and making the image of the card disappear when the hand starts running out of cards.
 
-##Acknowledgements
+## Acknowledgements
 Fisher-Yates shuffle algorithm
