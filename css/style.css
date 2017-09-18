@@ -1,6 +1,28 @@
 body{
 	/*text-align: center;*/
-	background: #42B8ED;
+	background: linear-gradient(#FFFF75, #C2F29E, #D982A8);
+}
+h1{
+	font-size: 80px;
+	color: black;
+	position: left;
+	font-family: 'Play', sans-serif;
+}
+p{
+	font-size: 24px;
+	color: black;
+	float: left;
+	font-family: 'Play', sans-serif;
+}
+.gameboard{
+	height: 100%;
+	width: 100%;
+}
+.sidebar{
+	height: 100%;
+	width: 30%;
+	background: linear-gradient(#FFFF75, #C2F29E, #D982A8);
+	position: absolute;
 }
 #cpuHand{
 	margin-top: 20px;

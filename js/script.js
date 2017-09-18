@@ -288,42 +288,88 @@ function shuffle(array) {
 
 // clicks card in hand, want this to move to the start card position
 $(".handCard").click(function(){
-	//this = card clicked
 	var playerCardRank = parseInt(this.childNodes[0].className);
 	var playerCardIndex = parseInt(this.childNodes[0].id);
 	var swap = false;
-
 	if(Math.abs(startCards[0].rank - playerCardRank) < 2) {
-		playerHand.splice(playerCardIndex , 1);
-		findMatchingCard(startCards[0].img, this.childNodes[0].src);
+		//playerHand.splice(playerCardIndex , 1);
+		findMatchingCard(startCards[0].img, this.childNodes[0]);
 		startCards[0].img = this.childNodes[0].src;
+		startCards[0].rank = parseInt(this.childNodes[0].className);
 		swap = true;
-
 	} else if(Math.abs(startCards[1].rank - playerCardRank) < 2) {
-		playerHand.splice(playerCardIndex, 1);
-		findMatchingCard(startCards[1].img, this.childNodes[0].src);
+		//playerHand.splice(playerCardIndex, 1);
+		findMatchingCard(startCards[1].img, this.childNodes[0]);
 		startCards[1].img = this.childNodes[0].src;
+		startCards[1].rank = parseInt(this.childNodes[0].className);
 		swap = true;
-		
 	} else {
 		console.log("Pick another card.")
 	}
+
 	if(swap) {
 		var newCard = playerDeck.pop();
-		console.log(this.childNodes[0]);
-		console.log(newCard.img);
 		this.childNodes[0].src = newCard.img;
+		this.childNodes[0].className = newCard.rank.toString();
+		playerHand[playerCardIndex] = newCard;
+		// this.childNodes[0].rank = parseInt(newCard.className);
 	}
-	
-
-	
+	console.log(startCards);
+	console.log(playerHand);
 });
 
+//matches img source to match cards
+function findMatchingCard(mySrc, newCard) {	
+	console.log(mySrc + " " + newCard.src);
+    var imgs = document.getElementsByTagName("img");
+    for (var i = 0; i < imgs.length; i++) {
+ 		var array1 = imgs[i].currentSrc.split("/");
+ 		var array2 = mySrc.split("/");
+ 		var srcString = "img/" + array1[array1.length - 1];
+ 		var mySrc = "img/" + array2[array2.length - 1];
+    	if(srcString === mySrc) {
+    		imgs[i].src = newCard.src;
+    		imgs[i].className = newCard.className;
+    		imgs[i].id = newCard.id;
+    		break;
+    	}
+    }
+}
 
-// function moveCards(array, discard, index, hand){
+// function cpuStart() {
+// 	while(opponentDeck.size() > 0) {
+// 		for(var i = 0; i < opponentHand.size(); i++) {
+// 			var cpuCardRank = opnenentHand[i].rank;
+// 			var cpuCardIndex = i;
+// 			var swap = false;
 
-// 	discard.push(array.splice(hand));
+// 			if(Math.abs(startCards[0].rank - playerCardRank) < 2) {
+// 				playerHand.splice(cpuCardIndex , 1);
+// 				swap = true;
+// 			}
+// 			if(Math.abs(startCards[1].rank - playerCardRank) < 2) {
+// 				playerHand.splice(cpuCardIndex , 1);
+// 				swap = true;
+// 			}
+// 			if(swap) {
+// 				var newCard = oppoentDeck.pop();
+// 				this.childNodes[0].src = newCard.img;
+// 			}
+// 		}
+// 	}
 // }
+
+//draw help cards when no moves possible from either end
+// function helpCard(){
+// 	if(findMatchingCard === false){
+// 		var help = helpDeck.pop();
+// 		console.log(this);
+// 		console.log("flipping new card.");
+// 	}else{
+// 		console.log("keep on goin!");
+// 	}
+// }
+
 
 
 function getCards(array, hand, length) {
@@ -344,7 +390,7 @@ function displayHand(array) {
 		showHand(array[i].img, array[i].rank, 56, 90, i);
 	}
 }
-//testing stupid things for githubio
+
 //generates start cards
 function displayStartCard(array) {
 	for(var i = 0; i < array.length; i++) {
@@ -379,33 +425,10 @@ function showStartCard(src, rank, width, height, index) {
     document.getElementsByClassName("startCard")[index].appendChild(img);
 }
 
-function findMatchingCard(mySrc, newCard) {	
-    var imgs = document.getElementsByTagName("img");
-    for (var i = 0; i < imgs.length; i++) {
- 		var array = imgs[i].currentSrc.split("/");
- 		var srcString = "img/" + array[array.length - 1];
-    	if(srcString == mySrc) {
-    		imgs[i].src = newCard;
-    		break;
-    	}
-    }
-}
 
 
-// function cpuStart() {
-// 	while(opponentDeck.size() > 0) {
-// 		for(var i = 0; i < opponentHand.size(); i++) {
-// 			var cpuCardRank = opnenentHand[i].rank;
-// 			var cpuCardIndex = i;
-// 			var swap = false;
 
-// 			if(Math.abs(startCards[0].rank - playerCardRank) < 2) {
-// 				playerHand.splice(cpuCardIndex , 1);
-// 				swap = true;
-// 			}
-// 		}
-// 	}
-// }
+
 
 // function checkWin(){
 // 	if(playerDeck && playerHand === []){
@@ -423,8 +446,7 @@ shuffle(cardObject);
 getCards(cardObject, playerHand, 5);
 getCards(cardObject, opponentHand, 5);
 getCards(cardObject, startCards, 2);
-getCards(cardObject, helpDeck, 5);
-getCards(cardObject, helpDeck, 5);
+getCards(cardObject, helpDeck, 10);
 getCards(cardObject, playerDeck, 15);
 getCards(cardObject, opponentDeck, 15);
 

@@ -2,36 +2,43 @@
 <html>
 <head>
 	<title>Speed</title>
+	<link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
 	<link rel="icon" type="icon" href="favicon.ico">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<div class="deck" id="cpuDeck"></div>
-<div class="hand-container">
-	<div id="cpuHand">
-		<div class="cpuHandCard"></div>
-		<div class="cpuHandCard"></div>
-		<div class="cpuHandCard"></div>
-		<div class="cpuHandCard"></div>
-		<div class="cpuHandCard"></div>
+<div class="sidebar">
+<h1>Speed</h1>
+<p>The goal of the game is to be the first player to run out of cards completely. There are 20 in each deck. You can play one up one down or equal to the card in the center. If no one can make a move a card will be randomly selected and placed in the center.</p>
+</div>
+<div class="gameboard">
+	<div class="deck" id="cpuDeck"></div>
+	<div class="hand-container">
+		<div id="cpuHand">
+			<div class="cpuHandCard"></div>
+			<div class="cpuHandCard"></div>
+			<div class="cpuHandCard"></div>
+			<div class="cpuHandCard"></div>
+			<div class="cpuHandCard"></div>
+		</div>
 	</div>
-</div>
-<div class="middle-row">
-	<div class="helpCard"></div>
-	<div class="startCard"></div>
-	<div class="startCard"></div>
-	<div class="helpCard"></div>
-</div>
-<div class="hand-container">
-	<div id="playerHand">
-		<div class="handCard"></div>
-		<div class="handCard"></div>
-		<div class="handCard"></div>
-		<div class="handCard"></div>
-		<div class="handCard"></div>
+	<div class="middle-row">
+		<div class="helpCard"></div>
+		<div class="startCard"></div>
+		<div class="startCard"></div>
+		<div class="helpCard"></div>
 	</div>
+	<div class="hand-container">
+		<div id="playerHand">
+			<div class="handCard"></div>
+			<div class="handCard"></div>
+			<div class="handCard"></div>
+			<div class="handCard"></div>
+			<div class="handCard"></div>
+		</div>
+	</div>
+	<div class="deck" id="playerDeck"></div>
 </div>
-<div class="deck" id="playerDeck"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 </body>
