@@ -1,5 +1,7 @@
 # speed-project
+![Game Image](GameScreenshot.png)
 
+https://erikr93.github.io/speed-project/
 
 ## Description
 Speed is a game involving one player and a computer player. The object is to be the first player to run out of cards in their deck. Cards are ranked 1-13 and you're able to play 1 up, 1 down, or 1 equal to one of the two cards in the middle of the gameboard.  Upon either player winning the game I have set up a reset button so you can play again.
