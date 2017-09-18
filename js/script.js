@@ -312,16 +312,21 @@ $(".handCard").click(function(){
 		this.childNodes[0].src = newCard.img;
 		this.childNodes[0].className = newCard.rank.toString();
 		playerHand[playerCardIndex] = newCard;
-		// this.childNodes[0].rank = parseInt(newCard.className);
 	}
-	console.log(startCards);
-	console.log(playerHand);
 });
 
+$("#reset").click(function(){
+	clearCards();
+	newGame();
+});
 //matches img source to match cards
 function findMatchingCard(mySrc, newCard) {	
-	console.log(mySrc + " " + newCard.src);
-    var imgs = document.getElementsByTagName("img");
+	//console.log(mySrc + " " + newCard.src);
+	var startCardArray = document.getElementsByClassName("startCard");
+    var imgs = [];
+    for(var i = 0; i < startCardArray.length; i++) {
+    	imgs.push(startCardArray[i].childNodes[0]);
+    }
     for (var i = 0; i < imgs.length; i++) {
  		var array1 = imgs[i].currentSrc.split("/");
  		var array2 = mySrc.split("/");
@@ -336,28 +341,49 @@ function findMatchingCard(mySrc, newCard) {
     }
 }
 
-// function cpuStart() {
-// 	while(opponentDeck.size() > 0) {
-// 		for(var i = 0; i < opponentHand.size(); i++) {
-// 			var cpuCardRank = opnenentHand[i].rank;
-// 			var cpuCardIndex = i;
-// 			var swap = false;
+//matches img source to match cards
+function findMatchingCard2(mySrc, newCard) {	
+    var startCardArray = document.getElementsByClassName("startCard");
+    var imgs = [];
+    for(var i = 0; i < startCardArray.length; i++) {
+    	imgs.push(startCardArray[i].childNodes[0]);
+    }
+    for (var i = 0; i < imgs.length; i++) {
+ 		var array1 = imgs[i].currentSrc.split("/");
+ 		var array2 = mySrc.split("/");
+ 		var srcString = "img/" + array1[array1.length - 1];
+ 		var mySrc = "img/" + array2[array2.length - 1];
+    	if(srcString === mySrc) {
+    		imgs[i].src = newCard.img;
+    		imgs[i].className = newCard.className;
+    		imgs[i].id = newCard.id;
+    		break;
+    	}
+    }
+}
 
-// 			if(Math.abs(startCards[0].rank - playerCardRank) < 2) {
-// 				playerHand.splice(cpuCardIndex , 1);
-// 				swap = true;
-// 			}
-// 			if(Math.abs(startCards[1].rank - playerCardRank) < 2) {
-// 				playerHand.splice(cpuCardIndex , 1);
-// 				swap = true;
-// 			}
-// 			if(swap) {
-// 				var newCard = oppoentDeck.pop();
-// 				this.childNodes[0].src = newCard.img;
-// 			}
-// 		}
-// 	}
-// }
+function cpuStart() {
+	for(var i = 0; i < opponentHand.length; i++) {
+		var swap = false;
+		if(Math.abs(startCards[0].rank - opponentHand[i].rank) < 2) {
+			findMatchingCard2(startCards[0].img, opponentHand[i]);
+			startCards[0].img = opponentHand[i].img;
+			startCards[0].rank = opponentHand[i].rank;
+			swap = true;
+		} else if(Math.abs(startCards[1].rank - opponentHand[i].rank) < 2) {
+			findMatchingCard2(startCards[1].img, opponentHand[i]);
+			startCards[1].img = opponentHand[i].img;
+			startCards[1].rank = opponentHand[i].rank;
+			swap = true;
+		}
+
+		if(swap) {
+			newCard = opponentDeck.pop();
+			opponentHand[i] = newCard;
+			break;
+		}
+	}
+}
 
 //draw help cards when no moves possible from either end
 // function helpCard(){
@@ -425,10 +451,17 @@ function showStartCard(src, rank, width, height, index) {
     document.getElementsByClassName("startCard")[index].appendChild(img);
 }
 
+function clearCards() {
+	var cards = document.getElementsByClassName("startCard");
+	for(var i = 0; i < cards.length; i++) {
+		cards[i].removeChild(cards[i].childNodes[0]);
+	}
 
-
-
-
+	cards = document.getElementsByClassName("handCard");
+	for(var i = 0; i < cards.length; i++) {
+		cards[i].removeChild(cards[i].childNodes[0]);
+	}
+}
 
 // function checkWin(){
 // 	if(playerDeck && playerHand === []){
@@ -438,23 +471,38 @@ function showStartCard(src, rank, width, height, index) {
 // 	}
 // }
 
+function newGame() {
+	playerHand = [];
+	playerDeck = [];
+	opponentHand = [];
+	opponentDeck = [];
+	startCards = [];
+	helpDeck = [];
+	discard = [];
+	var cardObjectClone = [];
+	
+	for(var i = 0; i < cardObject.length; i++) {
+		cardObjectClone[i] = cardObject[i];
+	}
 
-//shuffle cards
-shuffle(cardObject);
+	shuffle(cardObject);
+	
+	//distribute cards
+	getCards(cardObject, playerHand, 5);
+	getCards(cardObject, opponentHand, 5);
+	getCards(cardObject, startCards, 2);
+	getCards(cardObject, helpDeck, 10);
+	getCards(cardObject, playerDeck, 15);
+	getCards(cardObject, opponentDeck, 15);
 
-//distribute cards
-getCards(cardObject, playerHand, 5);
-getCards(cardObject, opponentHand, 5);
-getCards(cardObject, startCards, 2);
-getCards(cardObject, helpDeck, 10);
-getCards(cardObject, playerDeck, 15);
-getCards(cardObject, opponentDeck, 15);
+	cardObject = cardObjectClone;
 
-//display cards
-displayHand(playerHand);
-displayStartCard(startCards);
+	//display cards
+	displayHand(playerHand);
+	displayStartCard(startCards);
+}
 
-//wait 10
-// cpuStart();
+newGame();
 
+setInterval(function(){ cpuStart(); }, 3000);
 //win function

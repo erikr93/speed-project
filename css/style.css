@@ -1,6 +1,10 @@
 body{
 	/*text-align: center;*/
-	background: linear-gradient(#FFFF75, #C2F29E, #D982A8);
+	height: 100%;
+	margin: 0;
+	background: -webkit-linear-gradient(#FFFF75, #C2F29E, #D982A8);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
 }
 h1{
 	font-size: 80px;
@@ -8,24 +12,40 @@ h1{
 	position: left;
 	font-family: 'Play', sans-serif;
 }
-p{
+h2{
+	text-align: center;
+	font-size: 48px;
+}
+ul{
 	font-size: 24px;
 	color: black;
-	float: left;
 	font-family: 'Play', sans-serif;
 }
+button{
+	width: 300px;
+	height: 50px;
+	margin-left: 100px;
+}
 .gameboard{
+	margin-left: 200px;
 	height: 100%;
 	width: 100%;
 }
 .sidebar{
 	height: 100%;
 	width: 30%;
-	background: linear-gradient(#FFFF75, #C2F29E, #D982A8);
 	position: absolute;
 }
 #cpuHand{
 	margin-top: 20px;
+}
+.cpuHandCard{
+	width: 56px;
+	height: 90px;
+	margin: 5px;
+	display: inline-block;
+	background: url("../img/back1.jpg");
+	background-size:cover;
 }
 .hand-container{
 	background: #e6f5ff;
