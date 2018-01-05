@@ -268,7 +268,6 @@ var opponentHand = [];
 var opponentDeck = [];
 var startCards = [];
 var helpDeck = [];
-var discard = [];
 
 
 // shuffle function
@@ -320,7 +319,7 @@ $("#reset").click(function(){
 	newGame();
 });
 //matches img source to match cards
-function findMatchingCard(mySrc, newCard) {	
+function findMatchingCard(mySrc, newCard) {
 	//console.log(mySrc + " " + newCard.src);
 	var startCardArray = document.getElementsByClassName("startCard");
     var imgs = [];
@@ -342,7 +341,7 @@ function findMatchingCard(mySrc, newCard) {
 }
 
 //matches img source to match cards
-function findMatchingCard2(mySrc, newCard) {	
+function findMatchingCard2(mySrc, newCard) {
     var startCardArray = document.getElementsByClassName("startCard");
     var imgs = [];
     for(var i = 0; i < startCardArray.length; i++) {
@@ -384,19 +383,6 @@ function cpuStart() {
 		}
 	}
 }
-
-//draw help cards when no moves possible from either end
-// function helpCard(){
-// 	if(findMatchingCard === false){
-// 		var help = helpDeck.pop();
-// 		console.log(this);
-// 		console.log("flipping new card.");
-// 	}else{
-// 		console.log("keep on goin!");
-// 	}
-// }
-
-
 
 function getCards(array, hand, length) {
 	if(array.length > length) {
@@ -471,6 +457,17 @@ function clearCards() {
 // 	}
 // }
 
+// draw help cards when no moves possible from either end
+function helpCard(){
+	if(findMatchingCard === false){
+		var help = helpDeck.pop();
+		console.log(this);
+		console.log("flipping new card.");
+	}else{
+		console.log("keep on goin!");
+	}
+}
+
 function newGame() {
 	playerHand = [];
 	playerDeck = [];
@@ -478,15 +475,14 @@ function newGame() {
 	opponentDeck = [];
 	startCards = [];
 	helpDeck = [];
-	discard = [];
 	var cardObjectClone = [];
-	
+
 	for(var i = 0; i < cardObject.length; i++) {
 		cardObjectClone[i] = cardObject[i];
 	}
 
 	shuffle(cardObject);
-	
+
 	//distribute cards
 	getCards(cardObject, playerHand, 5);
 	getCards(cardObject, opponentHand, 5);
